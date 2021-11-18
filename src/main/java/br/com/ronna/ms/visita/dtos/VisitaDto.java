@@ -24,4 +24,7 @@ public class VisitaDto {
     private Long visitaClienteId;
     @NotNull
     private Double visitaDesconto;
+
+    private LocalDateTime visitaCreated;
+    private LocalDateTime visitaUpdated;
 }

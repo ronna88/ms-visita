@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Path;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,7 +33,10 @@ public class VisitaController {
     }
 
     @PutMapping("/visita/edit-visita/{id}")
-    public VisitaModel editVisita(@RequestBody VisitaModel visitaModel){
+    public VisitaModel editVisita(@RequestBody @Valid VisitaDto visitaDto, @PathVariable("id") Long visitaId){
+        VisitaModel visitaModel = new VisitaModel();
+        BeanUtils.copyProperties(visitaDto, visitaModel);
+        visitaModel.setVisitaId(visitaId);
         return visitaService.saveVisita(visitaModel);
     }
 
